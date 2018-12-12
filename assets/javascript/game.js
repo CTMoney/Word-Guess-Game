@@ -18,120 +18,162 @@ Refactoring:
 
 //all required variables
 
-//word pool + chosen word
-var words = ["BitCrush"], randomWord = words[Math.floor(Math.random() * words.length) + 0];
+//Containers to print info into
 
-//guess array + current guess
-var userGuesses = [], userGuess = "";
+
+//word pool + word blank
+var words = ["celebration", "sweet", "establish", "leave", "disturbance", "building", "annual", "murder", "salesperson", "pastel", "agree",
+    "allocation", "ecstasy", "sheet", "inspector", "multimedia", "earthflax", "air", "error", "coach"], wordBlank = "";
+
+//guess array + current guess + incorrect guesses
+var userGuesses = [], userGuess = "", incorrectGuesses = [];
 
 //wins + losses + tries remaining
 var losses = 0, wins = 0, tries = 15;
 
-//Difficulty?
-var hard = () => {tries = 7}, normal = () => {tries = 13}, easy = () => {tries = 19};
+//Difficulty? add condition confirm + reset if confirm
+var hard = () => { tries = 7 }, normal = () => { tries = 13 }, easy = () => { tries = 19 };
 
+//document.ready equivalent for non jquery
+document.addEventListener("DOMContentLoaded", function Start(event) {
 
-// The keyboard click needs to wrap the button click or the
-// button click needs to wrap the keyboard click
-// Both I need both!
+    //I tried putting this in the global scope and it didn't work which is kind of amusing
+    var feBlank = document.getElementById("blankW");
 
+    // Choosing the word
+    randomWord = words[Math.floor(Math.random() * words.length) + 0];
 
-// when a key is pressed itll store it as userGuess in lower case
-// it will run function clicked which hits the visual button in the html 
-document.onkeyup = function (event) {
-    userGuess = event.key.toLowerCase();    
-}
-
-function clicked(clicked_id) {
-    //the different button clicks contained in switch function
-    switch(clicked_id) {
-        case "lQ":
-        console.log("lQ")
-        break;
-        case "lW":
-        console.log("lW")
-        break;
-        case "lE":
-        console.log("lE")
-        break;
-        case "lR":
-        console.log("lR")
-        break;
-        case "lT":
-        console.log("lT")
-        break;
-        case "lY":
-        console.log("lY")
-        break;
-        case "lU":
-        console.log("lU")
-        break;
-        case "lI":
-        console.log("lI")
-        break;
-        case "lO":
-        console.log("lO")
-        break;
-        case "lP":
-        console.log("lP")
-        break;
-        case "lA":
-        console.log("lA")
-        break;
-        case "lS":
-        console.log("lS")
-        break;
-        case "lD":
-        console.log("lD")
-        break;
-        case "lF":
-        console.log("lF")
-        break;
-        case "lG":
-        console.log("lG")
-        break;
-        case "lH":
-        console.log("lH")
-        break;
-        case "lJ":
-        console.log("lJ")
-        break;
-        case "lK":
-        console.log("lK")
-        break;
-        case "lL":
-        console.log("lL")
-        break;
-        case "lZ":
-        console.log("lZ")
-        break;
-        case "lX":
-        console.log("lX")
-        break;
-        case "lC":
-        console.log("lC")
-        break;
-        case "lV":
-        console.log("lV")
-        break;
-        case "lB":
-        console.log("lB")
-        break;
-        case "lN":
-        console.log("lN")
-        break;
-        case "lM":
-        console.log("lM")
-        break;
-        
+    // Generating a blank for user
+    function genBlank() {
+        for (i = 0; i < randomWord.length; i++) {
+            wordBlank += "_ ";
+        }
+        document.getElementById("blankW").innerHTML = wordBlank;
     }
-    // if (userguess = "q") { console.log("HEYYY") }
-}
+    genBlank();
 
+    // when a key is pressed itll store it as userGuess in lower case
+    // it will run function clicked which hits the visual button in the html 
+    document.onkeyup = function (event) {
+        userGuess = event.key.toLowerCase();
+    }
 
-console.log(randomWord);
+    function clicked(clicked_id) {
+        //the different button clicks contained in switch function
+        switch (clicked_id) {
+            case "lQ":
+                userGuess = "q";
+                break;
+            case "lW":
+                userGuess = "w";
+                break;
+            case "lE":
+                userGuess = "e";
+                break;
+            case "lR":
+                userGuess = "r";
+                break;
+            case "lT":
+                userGuess = "t";
+                break;
+            case "lY":
+                userGuess = "y";
+                break;
+            case "lU":
+                userGuess = "u";
+                break;
+            case "lI":
+                userGuess = "i";
+                break;
+            case "lO":
+                userGuess = "o";
+                break;
+            case "lP":
+                userGuess = "p";
+                break;
+            case "lA":
+                userGuess = "a";
+                break;
+            case "lS":
+                userGuess = "s";
+                break;
+            case "lD":
+                userGuess = "d";
+                break;
+            case "lF":
+                userGuess = "f";
+                break;
+            case "lG":
+                userGuess = "g";
+                break;
+            case "lH":
+                userGuess = "h";
+                break;
+            case "lJ":
+                userGuess = "j";
+                break;
+            case "lK":
+                userGuess = "k";
+                break;
+            case "lL":
+                userGuess = "l";
+                break;
+            case "lZ":
+                userGuess = "z";
+                break;
+            case "lX":
+                userGuess = "x";
+                break;
+            case "lC":
+                userGuess = "c";
+                break;
+            case "lV":
+                userGuess = "v";
+                break;
+            case "lB":
+                userGuess = "b";
+                break;
+            case "lN":
+                userGuess = "n";
+                break;
+            case "lM":
+                userGuess = "m";
+                break;
 
-//     if (randomWord.toLowerCase().includes(userGuess)) {
-//     }    
-//     else if (randomWord.includes()) {
-//     }
+        }
+        // if (userguess = "q") { console.log("HEYYY") }
+    }
+
+    //Reset Button
+    function newWordWGG() {
+        randomWord = words[Math.floor(Math.random() * words.length) + 0];
+        userGuesses = [], userGuess = "", IncorrectGuesses = [], wordBlank = "";
+        start();
+    }
+    //console.log("hello".includes("e"));
+
+});
+
+/*
+var x = randomWord.indexOf(userGuess)
+
+if randomWord.indexOf(userGuess) !== -1 
+wordBlank.splice x=>userGuess
+innerhtml = wordBlank;
+
+if userGuess == -1 
+incorrectGuesses.push=>x 
+document.elementID(button).style => crossed-out
++ button disabled
+tries--
+
+if userGuess == special char
+throwErr / ignore
+
+if wordBlank == randomWord
+wins++
+
+if tries == 0
+losses++
+wordBlank = randomWord
+*/

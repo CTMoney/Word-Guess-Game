@@ -1,3 +1,14 @@
 h1 {
     text-align: center;
 }
+
+.blankWStyle {
+    font-size: 50px; 
+    text-align: center;
+}
+
+.margin-KB-button {
+    margin-right: 0.08%;
+    width: 3em;
+    height: 3em;
+}

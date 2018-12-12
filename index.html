@@ -16,38 +16,41 @@
 <body>
     <main class="container-fluid">
         <h1>Word Guess Game</h1>
-        <div style="margin-left: 10%">
-            <div class="row">
-                <button type="button" class="btn btn-secondary btn-md" onclick="clicked(this.id)" id="lQ">Q</button>
-                <button type="button" class="btn btn-secondary btn-md" onclick="clicked(this.id)" id="lW">W</button>
-                <button type="button" class="btn btn-secondary btn-md" onclick="clicked(this.id)" id="lE">E</button>
-                <button type="button" class="btn btn-secondary btn-md" onclick="clicked(this.id)" id="lR">R</button>
-                <button type="button" class="btn btn-secondary btn-md" onclick="clicked(this.id)" id="lT">T</button>
-                <button type="button" class="btn btn-secondary btn-md" onclick="clicked(this.id)" id="lY">Y</button>
-                <button type="button" class="btn btn-secondary btn-md" onclick="clicked(this.id)" id="lU">U</button>
-                <button type="button" class="btn btn-secondary btn-md" onclick="clicked(this.id)" id="lI">I</button>
-                <button type="button" class="btn btn-secondary btn-md" onclick="clicked(this.id)" id="lO">O</button>
-                <button type="button" class="btn btn-secondary btn-md" onclick="clicked(this.id)" id="lP">P</button>
+        <p class="blankWStyle" id="blankW"></p>
+        <!-- this whole section is just my idea to be able to use keyboard input or virtual keyboard input as the way to play the game I also wanted to make it so that when you clicked your real keyboard
+        it also visually clicked the virtual keyboard as to make it use its :active style -->
+        <div style="margin-left: 10%; margin-top: 3%;">
+            <div class="row" style="margin-bottom: 0.05%">
+                <button type="button" class="btn btn-secondary btn-lg margin-KB-button" onclick="clicked(this.id)" id="lQ">Q</button>
+                <button type="button" class="btn btn-secondary btn-lg margin-KB-button" onclick="clicked(this.id)" id="lW">W</button>
+                <button type="button" class="btn btn-secondary btn-lg margin-KB-button" onclick="clicked(this.id)" id="lE">E</button>
+                <button type="button" class="btn btn-secondary btn-lg margin-KB-button" onclick="clicked(this.id)" id="lR">R</button>
+                <button type="button" class="btn btn-secondary btn-lg margin-KB-button" onclick="clicked(this.id)" id="lT">T</button>
+                <button type="button" class="btn btn-secondary btn-lg margin-KB-button" onclick="clicked(this.id)" id="lY">Y</button>
+                <button type="button" class="btn btn-secondary btn-lg margin-KB-button" onclick="clicked(this.id)" id="lU">U</button>
+                <button type="button" class="btn btn-secondary btn-lg margin-KB-button" onclick="clicked(this.id)" id="lI">I</button>
+                <button type="button" class="btn btn-secondary btn-lg margin-KB-button" onclick="clicked(this.id)" id="lO">O</button>
+                <button type="button" class="btn btn-secondary btn-lg margin-KB-button" onclick="clicked(this.id)" id="lP">P</button>
             </div>
-            <div class="row" style="margin-left: 0.1em">
-                <button type="button" class="btn btn-secondary btn-md" onclick="clicked(this.id)" id="lA">A</button>
-                <button type="button" class="btn btn-secondary btn-md" onclick="clicked(this.id)" id="lS">S</button>
-                <button type="button" class="btn btn-secondary btn-md" onclick="clicked(this.id)" id="lD">D</button>
-                <button type="button" class="btn btn-secondary btn-md" onclick="clicked(this.id)" id="lF">F</button>
-                <button type="button" class="btn btn-secondary btn-md" onclick="clicked(this.id)" id="lG">G</button>
-                <button type="button" class="btn btn-secondary btn-md" onclick="clicked(this.id)" id="lH">H</button>
-                <button type="button" class="btn btn-secondary btn-md" onclick="clicked(this.id)" id="lJ">J</button>
-                <button type="button" class="btn btn-secondary btn-md" onclick="clicked(this.id)" id="lK">K</button>
-                <button type="button" class="btn btn-secondary btn-md" onclick="clicked(this.id)" id="lL">L</button>
+            <div class="row" style="margin-left: 0.1em; margin-bottom: 0.08%">
+                <button type="button" class="btn btn-secondary btn-lg margin-KB-button" onclick="clicked(this.id)" id="lA">A</button>
+                <button type="button" class="btn btn-secondary btn-lg margin-KB-button" onclick="clicked(this.id)" id="lS">S</button>
+                <button type="button" class="btn btn-secondary btn-lg margin-KB-button" onclick="clicked(this.id)" id="lD">D</button>
+                <button type="button" class="btn btn-secondary btn-lg margin-KB-button" onclick="clicked(this.id)" id="lF">F</button>
+                <button type="button" class="btn btn-secondary btn-lg margin-KB-button" onclick="clicked(this.id)" id="lG">G</button>
+                <button type="button" class="btn btn-secondary btn-lg margin-KB-button" onclick="clicked(this.id)" id="lH">H</button>
+                <button type="button" class="btn btn-secondary btn-lg margin-KB-button" onclick="clicked(this.id)" id="lJ">J</button>
+                <button type="button" class="btn btn-secondary btn-lg margin-KB-button" onclick="clicked(this.id)" id="lK">K</button>
+                <button type="button" class="btn btn-secondary btn-lg margin-KB-button" onclick="clicked(this.id)" id="lL">L</button>
             </div>
-            <div class="row"style="margin-left: 1em">
-                <button type="button" class="btn btn-secondary btn-md" onclick="clicked(this.id)" id="lZ">Z</button>
-                <button type="button" class="btn btn-secondary btn-md" onclick="clicked(this.id)" id="lX">X</button>
-                <button type="button" class="btn btn-secondary btn-md" onclick="clicked(this.id)" id="lC">C</button>
-                <button type="button" class="btn btn-secondary btn-md" onclick="clicked(this.id)" id="lV">V</button>
-                <button type="button" class="btn btn-secondary btn-md" onclick="clicked(this.id)" id="lB">B</button>
-                <button type="button" class="btn btn-secondary btn-md" onclick="clicked(this.id)" id="lN">N</button>
-                <button type="button" class="btn btn-secondary btn-md" onclick="clicked(this.id)" id="lM">M</button>
+            <div class="row"style="margin-left: 1em; margin-bottom: 0.08%">
+                <button type="button" class="btn btn-secondary btn-lg margin-KB-button" onclick="clicked(this.id)" id="lZ">Z</button>
+                <button type="button" class="btn btn-secondary btn-lg margin-KB-button" onclick="clicked(this.id)" id="lX">X</button>
+                <button type="button" class="btn btn-secondary btn-lg margin-KB-button" onclick="clicked(this.id)" id="lC">C</button>
+                <button type="button" class="btn btn-secondary btn-lg margin-KB-button" onclick="clicked(this.id)" id="lV">V</button>
+                <button type="button" class="btn btn-secondary btn-lg margin-KB-button" onclick="clicked(this.id)" id="lB">B</button>
+                <button type="button" class="btn btn-secondary btn-lg margin-KB-button" onclick="clicked(this.id)" id="lN">N</button>
+                <button type="button" class="btn btn-secondary btn-lg margin-KB-button" onclick="clicked(this.id)" id="lM">M</button>
             </div>
             <div class="row"></div>
         </div>
