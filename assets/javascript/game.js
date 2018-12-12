@@ -30,7 +30,7 @@ var words = ["celebration", "sweet", "establish", "leave", "disturbance", "build
 var userGuesses = [], userGuess = "", incorrectGuesses = [];
 
 //wins + losses + tries remaining
-var losses = 0, wins = 0, tries = 15;
+var losses = 0, wins = 0, tries = 13;
 
 //Difficulty? add condition confirm + reset if confirm == true then tie to button
 var hard = () => { tries = 7 }, normal = () => { tries = 13 }, easy = () => { tries = 19 };
@@ -57,6 +57,7 @@ document.addEventListener("DOMContentLoaded", function Start(event) {
     // it will run function clicked which hits the visual button in the html 
     document.onkeyup = function (event) {
         userGuess = event.key.toLowerCase();
+        //clicked(`l${userGuess.touppercase()}`);
     }
 
     function clicked(clicked_id) {
@@ -142,7 +143,6 @@ document.addEventListener("DOMContentLoaded", function Start(event) {
                 break;
 
         }
-        // if (userguess = "q") { console.log("HEYYY") }
     }
 
     //Reset Button
@@ -155,7 +155,8 @@ document.addEventListener("DOMContentLoaded", function Start(event) {
 
 });
 
-/*
+/* still to-do
+
 var x = randomWord.indexOf(userGuess)
 
 if randomWord.indexOf(userGuess) !== -1 
@@ -177,4 +178,5 @@ wins++
 if tries == 0
 losses++
 wordBlank = randomWord
+
 */
