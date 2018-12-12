@@ -1,18 +1,19 @@
 //Pseudo
 {/* 
 Goals:
-1. When user guesses, store that guess
-2. Create and store random word
-3. Print and update user's 
-4. Reveal letters as user guesses correctly
-5. Update Tries / Wins / Losses
-6. Automatically start over once game ends
+1. Create and store random word
+2. When user guesses, store that guess
+3. Print guess as either correct to proper index or incorrect to an array
+4. Update Tries / Wins / Losses
+5. Automatically start over once game ends
+6. Reset button
+7. Bonus - Difficulty settings
 /Goals
 
 Refactoring:
-1. Understanding different sections
-2. condense functions where possible
-3. concat functions with variables where possible
+1. separating different "sections" with which I can..
+2. condense functions where possible and then..
+3. concat functions with variables 
 /Refactoring
 */}
 
@@ -31,7 +32,7 @@ var userGuesses = [], userGuess = "", incorrectGuesses = [];
 //wins + losses + tries remaining
 var losses = 0, wins = 0, tries = 15;
 
-//Difficulty? add condition confirm + reset if confirm
+//Difficulty? add condition confirm + reset if confirm == true then tie to button
 var hard = () => { tries = 7 }, normal = () => { tries = 13 }, easy = () => { tries = 19 };
 
 //document.ready equivalent for non jquery
