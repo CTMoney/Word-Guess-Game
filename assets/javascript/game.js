@@ -1,265 +1,76 @@
-//Pseudo
-{/* 
-Goals:
-1. Create and store random word
-2. When user guesses, store that guess
-3. Print guess as either correct to proper index or incorrect to an array
-4. Update Tries / Wins / Losses
-5. Automatically start over once game ends
-6. Reset button
-7. Bonus - Difficulty settings
-/Goals
 
-Refactoring:
-1. separating different "sections" with which I can..
-2. condense functions where possible and then..
-3. concat functions with variables 
-/Refactoring
-*/}
-
-{//bonus
-    //  var hard = () => { tries = 7 }, normal = () => { tries = 13 }, easy = () => { tries = 19 };
-}
-
+var words = ["celebration", "sweet", "establish", "leave", "disturbance", "building", "annual", "murder", "salesperson", "pastel", "agree",
+"allocation", "ecstasy", "sheet", "inspector", "multimedia", "earthflax", "air", "error", "coach"];
+var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var losses = 0, wins = 0;
-//push element out of randomWord
+var incorrectGuesses = [], tries = 13, wordBlank = "";
+var randomWord = words[Math.floor(Math.random() * words.length) + 0];
+
 // Document.ready equivalent for non jquery
-document.addEventListener("DOMContentLoaded", function start(event) {
+$(document).ready(function start(load_event) {
 
-    var words = ["celebration", "sweet", "establish", "leave", "disturbance", "building", "annual", "murder", "salesperson", "pastel", "agree",
-        "allocation", "ecstasy", "sheet", "inspector", "multimedia", "earthflax", "air", "error", "coach"], wordBlank = " ";
+    $("#triesP").text(`Tries: ${tries}`), wordBlank = "";
+    for (let i = 0; i < randomWord.length; i++) {
+        wordBlank += "_";
+    }
+    $("#blankW").text(wordBlank);
 
-    var userGuesses = [], userGuess = "", incorrectGuesses = [], tries = 13;
-
-    document.getElementById("triesP").innerHTML = `Tries: ${tries}`;
-
-
-    randomWord = words[Math.floor(Math.random() * words.length) + 0];
-    randomCheck = randomWord;
     console.log(randomWord);
 
-    function generateBlank() {
-        for (i = 0; i < randomWord.length - 1; i++) {
-            wordBlank += "_";
-        }
-        document.getElementById("blankW").innerHTML = wordBlank;
-    }
-    generateBlank();
+    $(document).keyup(function (event) {
+        if (event.which >= 65 && event.which <= 90 && letters.includes(event.key.toLowerCase())) {
 
-    document.onkeyup = function (event) {
+            var userGuess = event.key.toLowerCase();
+            var wordIndex = randomWord.indexOf(userGuess);
+            var lettersIndex = letters.indexOf(userGuess);
 
-        userGuess = event.key.toLowerCase();
-        var userGuessIndex = randomWord.indexOf(userGuess);
+            if (wordIndex !== -1) {
+                wordBlank = wordBlank.split("");
 
+                for (let i = 0; i < randomWord.length; i++) {
+                    if (randomWord[i] == userGuess) {
+                        wordBlank[i] = userGuess;
+                    }
+                }
 
-        if (randomWord.includes(userGuess)) {
-            function updateBlank() {
-                wordBlank = wordBlank.replace(wordBlank.charAt(userGuessIndex), userGuess);
-                randomWord = randomWord.replace(wordBlank[userGuessIndex], '_');
-                document.getElementById("blankW").innerHTML = wordBlank;
-                console.log(randomWord);
+                wordBlank = wordBlank.join("");
+                $("#blankW").text(wordBlank);
             }
-            updateBlank();
-
-        }
-        else if (!randomWord.includes(userGuess)) {
-            function updateIncorrect() {
-                incorrectGuesses.push(userGuess);
-                document.getElementById("incorrectGuessP").innerHTML = incorrectGuesses;
+            else if (wordIndex == -1) {
                 tries--;
-                document.getElementById("triesP").innerHTML = `Tries: ${tries}`
+                $("#triesP").text(`Tries: ${tries}`);
+                incorrectGuesses += userGuess;
+                $("#incorrectGuessP").text(incorrectGuesses);
             }
-            updateIncorrect();
 
+            letters.splice(lettersIndex, 1);
         }
-        function winConditional() {
-            if (tries > 0 && wordBlank == randomCheck) {
-                wins++;
-                document.getElementById("winsP").innerHTML = `Wins: ${wins}`;
-                start();
-            }
+        else {
+            console.log("enter an alphabetic character or a character you have not tried before!")
         }
-        winConditional();
-
-        function lossConditional() {
-            if (tries == 0) {
-                losses++
-                wordBlank = randomWord;
-                document.getElementById("lossesP").innerHTML = `Losses: ${losses}`
-                document.getElementById("blankW").innerHTML = wordBlank;
-                start();
-            }
+        if (wordBlank == randomWord) {
+            wins++ 
+            $("#winsP").text(`Wins: ${wins}`);
+            gameRestart();
         }
-        lossConditional();
+        else if (tries == 0) {
+            losses++
+            $("#lossesP").text(`Losses: ${losses}`);
+            gameRestart();
+        }
+    }); 
 
-    }
-
-    // Full reset Button
-    function resetWGG() {
-        randomWord = words[Math.floor(Math.random() * words.length) + 0];
-        userGuesses = [], userGuess = "", IncorrectGuesses = [], wordBlank = "", losses = 0, wins = 0, tries = 13;
-        start();
+    function gameRestart() {
+        letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+        incorrectGuesses = [], tries = 13;
+        randomWord = words[Math.floor(Math.random() * words.length) + 0], wordBlank = "";
+        $("#triesP").text(`Tries: ${tries}`);
+        for (let i = 0; i < randomWord.length; i++) {
+            wordBlank += "_";        }
+        $("#blankW").text(wordBlank);
+        $("#incorrectGuessP").text('');
+        console.log(randomWord);
+        
     }
 
 });
-
-{//console.log("hello".includes("e"));
-/* still to-do
-
-var x = randomWord.indexOf(userGuess)
-
-if randomWord.indexOf(userGuess) !== -1
-wordBlank.splice x=>userGuess
-innerhtml = wordBlank;
-
-if userGuess == -1
-incorrectGuesses.push=>x
-document.elementID(button).style => crossed-out
-+ button disabled
-tries--
-
-if userGuess == special char
-throwErr / ignore
-
-if wordBlank == randomWord
-wins++
-
-if tries == 0
-losses++
-wordBlank = randomWord
-
-Bonus -Visual click on physical click
-    // clicked(`l${userGuess.toUpperCase()}`);
-    // console.log(`l${userGuess.toUpperCase()}`);
-*/
-
-  // // Win conditional
-    // if (tries > 0 && wordBlank == randomWord) {
-    //     wins++
-    //     document.getElementById("winsP").innerHTML = `Wins: ${wins}`;
-
-    // }
-    // // Loss conditional
-    // if (tries == 0) {
-    //     losses++ 
-    //     wordBlank = randomWord;
-    //     document.getElementById("lossesP").innerHTML = `Losses: ${losses}`;
-    // }
-
-/* function clicked(clicked_id) {
-//     // The different button clicks contained in switch function
-//     switch (clicked_id) {
-//         case "lQ":
-//             userGuess = "q";
-//             break;
-//         case "lW":
-//             userGuess = "w";
-//             break;
-//         case "lE":
-//             userGuess = "e";
-//             break;
-//         case "lR":
-//             userGuess = "r";
-//             break;
-//         case "lT":
-//             userGuess = "t";
-//             break;
-//         case "lY":
-//             userGuess = "y";
-//             break;
-//         case "lU":
-//             userGuess = "u";
-//             break;
-//         case "lI":
-//             userGuess = "i";
-//             break;
-//         case "lO":
-//             userGuess = "o";
-//             break;
-//         case "lP":
-//             userGuess = "p";
-//             break;
-//         case "lA":
-//             userGuess = "a";
-//             break;
-//         case "lS":
-//             userGuess = "s";
-//             break;
-//         case "lD":
-//             userGuess = "d";
-//             break;
-//         case "lF":
-//             userGuess = "f";
-//             break;
-//         case "lG":
-//             userGuess = "g";
-//             break;
-//         case "lH":
-//             userGuess = "h";
-//             break;
-//         case "lJ":
-//             userGuess = "j";
-//             break;
-//         case "lK":
-//             userGuess = "k";
-//             break;
-//         case "lL":
-//             userGuess = "l";
-//             break;
-//         case "lZ":
-//             userGuess = "z";
-//             break;
-//         case "lX":
-//             userGuess = "x";
-//             break;
-//         case "lC":
-//             userGuess = "c";
-//             break;
-//         case "lV":
-//             userGuess = "v";
-//             break;
-//         case "lB":
-//             userGuess = "b";
-//             break;
-//         case "lN":
-//             userGuess = "n";
-//             break;
-//         case "lM":
-//             userGuess = "m";
-//             break;
-
-//     }
-//     let x = randomWord.indexOf(userGuess);
-//     if (randomWord.includes(userGuess)) {
-//         function updateBlank() {
-//             wordBlank = wordBlank.replace(wordBlank[x], userGuess);
-//             document.getElementById("blankW").innerHTML = wordBlank;
-
-//         }
-//         updateBlank();
-//     }
-//     else if (!randomWord.includes(userGuess)) {
-//         function updateIncorrect() {
-//             incorrectGuesses = incorrectGuesses.push(userGuess);
-//             document.getElementById("incorrectGuessP").innerHTML = incorrectGuesses;
-//             tries--;
-//             document.getElementById("triesP").innerHTML = `Tries: ${tries}`
-//         }
-//         updateIncorrect();
-
-//     }
-//     function winConditional() {
-//         if (tries > 0 && wordBlank == randomWord) {
-//             wins++
-//             document.getElementById("winsP").innerHTML = `Wins: ${wins}`;
-//         }
-//     }
-//     function lossConditional() {
-//         if (tries == 0) {
-//             losses++
-//             wordBlank = randomWord;
-//             document.getElementById("lossesP").innerHTML = `Losses: ${losses}`
-//             document.getElementById("").innerHTML = wordBlank;
-//         }
-//     }
- } */}
