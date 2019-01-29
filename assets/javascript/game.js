@@ -6,7 +6,6 @@ var losses = 0, wins = 0;
 var incorrectGuesses = [], tries = 13, wordBlank = "";
 var randomWord = words[Math.floor(Math.random() * words.length) + 0];
 
-// Document.ready equivalent for non jquery
 $(document).ready(function start(load_event) {
 
     $("#triesP").text(`Tries: ${tries}`), wordBlank = "";
